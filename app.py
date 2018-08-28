@@ -19,7 +19,7 @@ async def hello(request):
             result = await resp.json()
     text = urllib.parse.quote(result['text_out'].strip('</h1>'))
     async with ClientSession() as session:
-        url = '/'.join([IMAGE_URL, 'api', 'v1', f'?{text}', '']) 
+        url = '/'.join([IMAGE_URL, 'api', 'v1', 'qrcode', f'{text}']) 
         async with session.get(f'http://{url}') as resp:
             return web.Response(body=await resp.content.read(), 
                                 headers={'Content-Type': resp.headers['Content-Type']})
